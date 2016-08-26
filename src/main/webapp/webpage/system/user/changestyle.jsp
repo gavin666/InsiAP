@@ -27,6 +27,9 @@
 			<tr>
 				<td class="value"><input type="radio" value="sliding" name="indexStyle"  /><span>Sliding云桌面</span></td>
 			</tr>
+			<tr>
+				<td class="value"><input type="radio" value="aceinsiap" name="indexStyle"  /><span>InsiAP</span></td>
+			</tr>
 			
 			<!-- 
 			<tr>
