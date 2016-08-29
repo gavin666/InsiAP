@@ -231,7 +231,7 @@ public class LoginController extends BaseController{
             request.getSession().setAttribute("CKFinder_UserRole", "admin");
 			
 			SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
-			if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())||"hplus".equals(sysTheme.getStyle())){
+			if("aceinsiap".equals(sysTheme.getStyle())||"ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())||"hplus".equals(sysTheme.getStyle())){
 				request.setAttribute("menuMap", getFunctionMap(user));
 			}
 

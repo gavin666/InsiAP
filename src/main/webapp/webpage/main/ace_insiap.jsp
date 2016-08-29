@@ -311,7 +311,8 @@
 							</a></li>
 							<li><a
 								href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)">
-									<i class="ace-icon fa fa-cog"></i> <t:mutiLang langKey="common.my.style" />
+									<i class="ace-icon fa fa-cog"></i> <t:mutiLang
+										langKey="common.my.style" />
 							</a></li>
 
 							<li><a href="javascript:clearLocalstorage()"> <i
@@ -386,6 +387,15 @@
 			<!-- /.sidebar-shortcuts -->
 
 			<ul class="nav nav-list">
+
+				<li class="active"><a
+					href="javascript:addTabs({id:'home',title:'首页',close: false,url: 'loginController.do?acehome'});">
+						<i class="menu-icon fa fa-tachometer"></i> <span class="menu-text">
+							首页</span>
+				</a></li>
+
+				<t:menu style="ace" menuFun="${menuMap}"></t:menu>
+
 				<li class=""><a href="index.html"> <i
 						class="menu-icon fa fa-tachometer"></i> <span class="menu-text">
 							Dashboard </span>
@@ -629,32 +639,6 @@
 		<!-- /section:basics/sidebar -->
 		<div class="main-content">
 			<div class="main-content-inner">
-				<!-- #section:basics/content.breadcrumbs -->
-				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
-						</li>
-
-						<li><a href="#">Other Pages</a></li>
-						<li class="active">Blank Page</li>
-					</ul>
-					<!-- /.breadcrumb -->
-
-					<!-- #section:basics/content.searchbox -->
-					<div class="nav-search" id="nav-search">
-						<!-- <form class="form-search">
-							<span class="input-icon"> <input type="text"
-								placeholder="搜索 ..." class="nav-search-input"
-								id="nav-search-input" autocomplete="off" /> <i
-								class="ace-icon fa fa-search nav-search-icon"></i>
-							</span>
-						</form> -->
-					</div>
-					<!-- /.nav-search -->
-
-					<!-- /section:basics/content.searchbox -->
-				</div>
-
 				<!-- /section:basics/content.breadcrumbs -->
 				<div class="page-content">
 					<!-- #section:settings.box -->
@@ -767,9 +751,14 @@
 
 					<!-- /section:settings.box -->
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-xs-12" style="width: 99%;padding-left:2px;padding-right: 2px;" id="tabs">
 							<!-- PAGE CONTENT BEGINS -->
-							这是内容区域
+							<ul class="nav nav-tabs" role="tablist">
+								<!-- <li class="active"><a href="#Index" role="tab" data-toggle="tab">首页</a></li> -->
+							</ul>
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="Index"></div>
+							</div>
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->
@@ -869,7 +858,32 @@
 
 	<t:base type="tools"></t:base>
 	<script src="plug-in/jquery-plugs/storage/jquery.storageapi.min.js"></script>
+	<script type="text/javascript"
+		src="plug-in/ace/assets/js/bootstrap-tab.js"></script>
 	<script src="plug-in/ace-insiap/components/bootbox.js/bootbox.min.js"></script>
+
+	<script type="text/javascript">
+		jQuery(function($) {
+			addTabs({
+				id : 'home',
+				title : '首页',
+				close : false,
+				url : 'loginController.do?acehome'
+			});
+			$('.theme-poptit .close').click(function() {
+				$('.theme-popover-mask').fadeOut(100);
+				$('.theme-popover').slideUp(200);
+			});
+			$('#closeBtn').click(function() {
+				$('.theme-popover-mask').fadeOut(100);
+				$('.theme-popover').slideUp(200);
+			});
+			//$('#ace-settings-sidebar').click();
+			//$('#sidebar').addClass('compact');
+			$('#sidebar li').addClass('hover').filter('.open').removeClass(
+					'open').find('> .submenu').css('display', 'none');
+		});
+	</script>
 
 	<script type="text/javascript">
 		function clearLocalstorage() {
