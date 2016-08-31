@@ -113,6 +113,10 @@ public class MenuTag extends TagSupport {
 		if(style.equals("hplus")){
 			sb.append(ListtoMenu.getHplusMultistageTree(menuFun));
 		}
+		if(style.equals("aceinsiap"))
+		{
+			sb.append(ListtoMenu.getAceInsiapMultistageTree(menuFun));
+		}
 		return sb;
 	}
 	public void setStyle(String style) {
