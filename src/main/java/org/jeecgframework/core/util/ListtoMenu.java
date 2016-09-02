@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.jeecgframework.core.enums.SysACEIconEnum;
+import org.jeecgframework.core.enums.SysACEInsiAPIconEnum;
 import org.jeecgframework.web.system.pojo.base.TSFunction;
 import org.jeecgframework.web.system.service.MutiLangServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -946,7 +947,7 @@ public class ListtoMenu {
 		for (TSFunction function : list) {
 			menuString.append("<li class=\"\" id=\"" + function.getId() + "\">");
 			menuString.append("<a href=\"#\" class=\"dropdown-toggle\" ><i class=\""
-					+ SysACEIconEnum.toEnum(function.getTSIcon().getIconClas()).getThemes() + "\"></i>");
+					+ SysACEInsiAPIconEnum.toEnum(function.getTSIcon().getIconClas()).getThemes() + "\"></i>");
 			menuString.append("<span class=\"menu-text\">");
 			menuString.append(getMutiLang(function.getFunctionName()));
 			menuString.append("</span>");

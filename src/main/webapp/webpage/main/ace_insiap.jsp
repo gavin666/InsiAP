@@ -358,20 +358,20 @@
 			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 					<button class="btn btn-success">
-						<i class="ace-icon fa fa-signal"></i>
+						盈
 					</button>
 
 					<button class="btn btn-info">
-						<i class="ace-icon fa fa-pencil"></i>
+						时
 					</button>
 
 					<!-- #section:basics/sidebar.layout.shortcuts -->
 					<button class="btn btn-warning">
-						<i class="ace-icon fa fa-users"></i>
+						埃
 					</button>
 
 					<button class="btn btn-danger">
-						<i class="ace-icon fa fa-cogs"></i>
+						普
 					</button>
 
 					<!-- /section:basics/sidebar.layout.shortcuts -->
