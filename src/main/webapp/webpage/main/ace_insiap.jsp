@@ -647,6 +647,9 @@
 
 	<script type="text/javascript">
 		jQuery(function($) {
+			$('#ace-settings-sidebar').click();
+			$('#ace-settings-navbar').click();;
+			$('#ace-settings-breadcrumbs').click();;
 			addTabs({
 				id : 'home',
 				title : '首页',
