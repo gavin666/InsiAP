@@ -50,7 +50,7 @@
 		<![endif]-->
 </head>
 
-<body class="login-layout">
+<body class="login-layout light-login">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
@@ -61,7 +61,7 @@
 								<i class="ace-icon fa fa-leaf green"></i> <span class="red">InsiAP</span>
 							</h1>
 							<h1>
-								<span class="white" id="id-text2">保险展业智能代理平台</span>
+								<span class="grey" id="id-text2">保险展业智能代理平台</span>
 							</h1>
 						</div>
 
@@ -290,10 +290,18 @@
 						<!-- /.position-relative -->
 
 						<div class="navbar-fixed-top align-right">
-							<br /> &nbsp; <a id="btn-login-dark" href="#">Dark</a> &nbsp; <span
-								class="blue">/</span> &nbsp; <a id="btn-login-blur" href="#">Blur</a>
-							&nbsp; <span class="blue">/</span> &nbsp; <a id="btn-login-light"
-								href="#">Light</a> &nbsp; &nbsp; &nbsp;
+							<br /> 
+							&nbsp; 
+							<a id="btn-login-light" href="#">Light</a>
+							&nbsp; 
+							<span class="blue">/</span> 
+							&nbsp; 
+							<a id="btn-login-blur" href="#">Blur</a>
+							&nbsp; 
+							<span class="blue">/</span> 
+							&nbsp; 
+							<a id="btn-login-dark" href="#">Dark</a>  
+							&nbsp; &nbsp; &nbsp;
 						</div>
 					</div>
 				</div>
