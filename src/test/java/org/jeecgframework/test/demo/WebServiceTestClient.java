@@ -1,15 +1,16 @@
 package org.jeecgframework.test.demo;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+
+import org.jeecgframework.core.util.JSONHelper;
 import org.jeecgframework.core.util.WebServiceUtil;
-import org.jeecgframework.web.demo.ws.test.JeecgWServiceI;
 
 import net.sf.json.JSONObject;
 
 public class WebServiceTestClient {
-	public static void main11(String[] args) {
+	public static void main(String[] args) {
 		String url = "http://uacserver.e-bao.cn:8086/UACService.asmx"; 
 		String xmlns = "http://www.songlink.uac.cn/"; 
 		String method= "RequestSecretDeviceService";
@@ -32,8 +33,9 @@ public class WebServiceTestClient {
 		
 		result = WebServiceUtil.SoapWebservice(url, xmlns, method, pamps, SoapHeaderUser, SoapHeaderSign);
 		//JSONObject jsonObject = JSONObject.fromObject(result);
-		
-		System.out.println(result.toString());		
+		System.out.println(result);
+		Map<String,Object> results = JSONHelper.json2Map(result);
+		System.out.println(results.get("Phone"));		
 	}
 	
 }
