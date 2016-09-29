@@ -6,8 +6,6 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
  * 
  * @ClassName: JeecgWServiceClient
  * @Description: cxf客户端测试类
- * @author huangzq
- * @date 2015-12-31 下午05:44:50
  * 
  */
 public class JeecgWServiceClient {
@@ -17,7 +15,7 @@ public class JeecgWServiceClient {
 		bean.setServiceClass(JeecgWServiceI.class);
 		bean.setAddress("http://localhost:8080/insiap/cxf/JeecgWService");
 		JeecgWServiceI client = (JeecgWServiceI) bean.create();
-		//System.out.println(client.sayHello());
+		System.out.println(client.sayHello());
 	}
 	
 	public static void main(String[] args) {
@@ -25,6 +23,6 @@ public class JeecgWServiceClient {
 		bean.setServiceClass(JeecgWServiceI.class);
 		bean.setAddress("http://localhost:8080/insiap/cxf/JeecgWDemoService");
 		JeecgWServiceI client = (JeecgWServiceI) bean.create();
-		//System.out.println(client.sayHello());
+		System.out.println(client.sayHello());
 	}
 }
