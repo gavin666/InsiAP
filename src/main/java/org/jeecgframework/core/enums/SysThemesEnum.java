@@ -16,7 +16,8 @@ public enum SysThemesEnum {
 	ACE_LE_STYLE("acele","main/ace_main","metrole", "ACE2风格"),
 	DIY("diy","main/diy","default","diy风格"),
 	HPLUS("hplus","main/hplus_main","metrole","H+风格"),
-	ACE_INSIAP_STYLE("aceinsiap","main/ace_insiap","default", "ACE_InsiAP");
+	//ACE_INSIAP_STYLE("aceinsiap","main/ace_insiap","default", "ACE_InsiAP");
+	ACE_INSIAP_STYLE("aceinsiap","angular/index","default", "ACE_InsiAP");
 
 
     /**
