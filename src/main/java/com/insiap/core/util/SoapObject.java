@@ -1,4 +1,4 @@
-package org.jeecgframework.core.util;
+package com.insiap.core.util;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -20,7 +20,6 @@ import org.apache.http.util.EntityUtils;
 
 /**
  * 拼接soapheader发送请求WS信息。
- * @author ZhanWu.Li
  *
  */
 public class SoapObject {
@@ -109,8 +108,9 @@ public class SoapObject {
 		soapBodyStr.append("     <").append(Method).append(" xmlns=\"")
 				.append(xmlns).append("\">\n");
 
-		Iterator iter = params.entrySet().iterator();
+		Iterator<?> iter = params.entrySet().iterator();
 		while (iter.hasNext()) {
+			@SuppressWarnings("rawtypes")
 			Map.Entry entry = (Map.Entry) iter.next();
 			String key = (String) entry.getKey();
 			String val = (String) entry.getValue();
