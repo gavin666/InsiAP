@@ -114,6 +114,12 @@
 						<value>cgFormDataController.do?updateFormInfo</value>
 					</list>
 				</property>
+				<!-- 模糊匹配 ,主要过滤rest请求-->
+				<property name="excludeContainUrls">
+					<list>
+						<value>rest/</value>
+					</list>
+				</property>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
