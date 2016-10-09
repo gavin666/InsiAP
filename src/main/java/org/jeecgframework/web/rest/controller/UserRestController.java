@@ -41,10 +41,10 @@ public class UserRestController {
 	private Validator validator;
 
 	/**
-	 * 访问地址：http://localhost:8080/jeecg/rest/user
+	 * 访问地址：http://localhost:8080/insiap/rest/user/hello
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/hello",method = RequestMethod.GET)
 	@ResponseBody
 	public List<TSUser> list() {
 		List<TSUser> listUsers=userService.getList(TSUser.class);
@@ -52,7 +52,7 @@ public class UserRestController {
 	}
 
 	/**
-	 * 访问地址：http://localhost:8080/jeecg/rest/user/{id}
+	 * 访问地址：http://localhost:8080/insiap/rest/user/{id}
 	 * @param id
 	 * @return
 	 */
