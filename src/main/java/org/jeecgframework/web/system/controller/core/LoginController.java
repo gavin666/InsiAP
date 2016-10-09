@@ -46,16 +46,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.insiap.core.userinfo.GetUserInfoFromWS;
+
+
 /**
  * 登陆初始化控制器
- * @author 张代浩
  * 
  */
 //@Scope("prototype")
 @Controller
 @RequestMapping("/loginController")
 public class LoginController extends BaseController{
-	private Logger log = Logger.getLogger(LoginController.class);
+	//private Logger log = Logger.getLogger(LoginController.class);
 	private SystemService systemService;
 	private UserService userService;
 
@@ -91,6 +93,8 @@ public class LoginController extends BaseController{
 	public AjaxJson checkuser(TSUser user, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		AjaxJson j = new AjaxJson();
+		String UserID="";//代理人ID
+		
 		//语言选择
 		if (req.getParameter("langCode")!=null) {
 			req.getSession().setAttribute("lang", req.getParameter("langCode"));
@@ -104,40 +108,40 @@ public class LoginController extends BaseController{
 			j.setMsg(mutiLangService.getLang("common.verifycode.error"));
 			j.setSuccess(false);
 		} else {
-			//用户登录验证逻辑
-			TSUser u = userService.checkUserExits(user);
-			if (u == null) {
+			//用户登录验证逻辑	
+			Map<String,Object> results = GetUserInfoFromWS.checkEBTUser(user.getUserName().trim(), user.getPassword().trim());
+			String flag = results.get("result").toString().trim();	
+			
+			if (flag == null || !"3".equals(flag)) {
 				j.setMsg(mutiLangService.getLang("common.username.or.password.error"));
 				j.setSuccess(false);
 				return j;
-			}
-			if (u != null && u.getStatus() != 0) {
-				// 处理用户有多个组织机构的情况，以弹出框的形式让用户选择
-				Map<String, Object> attrMap = new HashMap<String, Object>();
-				j.setAttributes(attrMap);
-
-				String orgId = req.getParameter("orgId");
-				if (oConvertUtils.isEmpty(orgId)) {
-					// 没有传组织机构参数，则获取当前用户的组织机构
-					Long orgNum = systemService.getCountForJdbc("select count(1) from t_s_user_org where user_id = '" + u.getId() + "'");
-					if (orgNum > 1) {
-						attrMap.put("orgNum", orgNum);
-						attrMap.put("user", u);
-					} else {
-						Map<String, Object> userOrgMap = systemService.findOneForJdbc("select org_id as orgId from t_s_user_org where user_id=?", u.getId());
-						saveLoginSuccessInfo(req, u, (String) userOrgMap.get("orgId"));
-					}
-				} else {
-					attrMap.put("orgNum", 1);
-					saveLoginSuccessInfo(req, u, orgId);
-				}
-			} else {
-
-				j.setMsg(mutiLangService.getLang("common.lock.user"));
-
-				j.setSuccess(false);
-			}
+			}else{
+				UserID = results.get("Id").toString().trim();
+				user.setId(UserID);
+				user.setEmail(results.get("Email").toString().trim());
+				user.setMobilePhone(results.get("Phone").toString().trim());
+				//获取名片AgentCard节点信息
+				Map<String,Object> AgentCard = GetUserInfoFromWS.getUserCardInfo(UserID, "AgentCard");
+				user.setStatus((short) 1);
+				user.setRealName(AgentCard.get("AgentName").toString());
+				user.setDepartid(AgentCard.get("CompanyId").toString());
+				user.setSignatureFile(AgentCard.get("PortraitAddress").toString());
+				
+				TSDepart currentDepart = new TSDepart();
+				currentDepart.setDepartname(AgentCard.get("CompanyName").toString());
+				currentDepart.setAddress(AgentCard.get("CompanyLink").toString());
+				currentDepart.setDescription(AgentCard.get("CompanyLogo").toString());
+				currentDepart.setId(AgentCard.get("CompanyId").toString());
+				currentDepart.setOrgCode(AgentCard.get("WikiBrandID").toString());
+				currentDepart.setOrgType("1");
+				user.setCurrentDepart(currentDepart);
+				
+				saveLoginSuccessInfo(req, user);
+				return j;
+			}		
 		}
+		
 		return j;
 	}
 	
@@ -158,7 +162,8 @@ public class LoginController extends BaseController{
 		TSUser u = userService.checkUserExits(user);
 		if (oConvertUtils.isNotEmpty(orgId)) {
 			attrMap.put("orgNum", 1);
-			saveLoginSuccessInfo(req, u, orgId);
+			//saveLoginSuccessInfo(req, u, orgId);
+			saveLoginSuccessInfo(req, u);
 		}
 		return j;
 	}
@@ -167,18 +172,16 @@ public class LoginController extends BaseController{
      * 保存用户登录的信息，并将当前登录用户的组织机构赋值到用户实体中；
      * @param req request
      * @param user 当前登录用户
-     * @param orgId 组织主键
+     * 
      */
-    private void saveLoginSuccessInfo(HttpServletRequest req, TSUser user, String orgId) {
+    private void saveLoginSuccessInfo(HttpServletRequest req, TSUser user) {
     	String message = null;
-        TSDepart currentDepart = systemService.get(TSDepart.class, orgId);
-        user.setCurrentDepart(currentDepart);
 
         HttpSession session = ContextHolderUtils.getSession();
 
         session.setAttribute(ResourceUtil.LOCAL_CLINET_USER, user);
 
-        message = mutiLangService.getLang("common.user") + ": " + user.getUserName() + "["+ currentDepart.getDepartname() + "]" + mutiLangService.getLang("common.login.success");
+        message = mutiLangService.getLang("common.user") + ": " + user.getUserName() + "["+ user.getCurrentDepart().getDepartname() + "]" + mutiLangService.getLang("common.login.success");
 
         //当前session为空 或者 当前session的用户信息与刚输入的用户信息一致时，则更新Client信息
         Client clientOld = ClientManager.getInstance().getClient(session.getId());
@@ -213,17 +216,10 @@ public class LoginController extends BaseController{
 	@RequestMapping(params = "login")
 	public String login(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) {
 		TSUser user = ResourceUtil.getSessionUserName();
-		String roles = "";
+
 		if (user != null) {
-			List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
-			for (TSRoleUser ru : rUsers) {
-				TSRole role = ru.getTSRole();
-				roles += role.getRoleName() + ",";
-			}
-			if (roles.length() > 0) {
-				roles = roles.substring(0, roles.length() - 1);
-			}
-            modelMap.put("roleName", roles);
+			
+            modelMap.put("userPortrait", user.getSignatureFile());
             modelMap.put("userName", user.getUserName());
 
             modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());

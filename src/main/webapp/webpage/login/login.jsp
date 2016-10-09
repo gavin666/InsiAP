@@ -89,13 +89,13 @@
 												<label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> <input
 														type="text" class="form-control" placeholder="请输入账号"
-														name="userName" id="userName" value="admin" /> <i
+														name="userName" id="userName" value="18363920690" /> <i
 														class="ace-icon fa fa-user"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> <input
 														type="password" class="form-control" placeholder="请输入密码"
-														name="password" id="password" value="123456" /> <i
+														name="password" id="password" value="12345678" /> <i
 														class="ace-icon fa fa-lock"></i>
 												</span>
 												</label> </label> <label class="block clearfix">
@@ -419,7 +419,7 @@
 			var data = $(":input").each(function() {
 				formData[this.name] = $("#" + this.name).val();
 			});
-			formData['orgId'] = orgId ? orgId : "";
+			//formData['orgId'] = orgId ? orgId : "";
 			//语言
 			formData['langCode'] = $("#langCode").val();
 			formData['langCode'] = $("#langCode option:selected").val();
@@ -436,66 +436,8 @@
 							$("#errMsgContiner").show();
 							$("#showErrMsg").html("正在登录...");
 							var d = $.parseJSON(data);
-							if (d.success) {
-								if (d.attributes.orgNum > 1) {
-									//用户拥有多个部门，需选择部门进行登录
-									var title, okButton;
-									if ($("#langCode").val() == 'en') {
-										title = "Please select Org";
-										okButton = "Ok";
-									} else {
-										title = "请选择组织机构";
-										okButton = "确定";
-									}
-									$
-											.dialog({
-												id : 'LHG1976D',
-												title : title,
-												max : false,
-												min : false,
-												drag : false,
-												resize : false,
-												content : 'url:userController.do?userOrgSelect&userId='
-														+ d.attributes.user.id,
-												lock : true,
-												button : [ {
-													name : okButton,
-													focus : true,
-													callback : function() {
-														iframe = this.iframe.contentWindow;
-														var orgId = $('#orgId',
-																iframe.document)
-																.val();
-														formData['orgId'] = orgId ? orgId
-																: "";
-														$
-																.ajax({
-																	async : false,
-																	cache : false,
-																	type : 'POST',
-																	url : 'loginController.do?changeDefaultOrg',// 请求的action路径
-																	data : formData,
-																	error : function() {// 请求失败处理函数
-																	},
-																	success : function(
-																			data) {
-																		window.location.href = actionurl;
-																	}
-																});
-														this.close();
-														return false;
-													}
-												} ],
-												close : function() {
-													setTimeout(
-															"window.location.href='"
-																	+ actionurl
-																	+ "'", 10);
-												}
-											});
-								} else {
-									window.location.href = actionurl;
-								}
+							if (d.success) {							
+								window.location.href = actionurl;
 							} else {
 								showErrorMsg(d.msg);
 							}

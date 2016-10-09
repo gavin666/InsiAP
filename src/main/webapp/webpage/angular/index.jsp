@@ -7,7 +7,7 @@
 <meta charset="utf-8" />
 
 <title ng-bind-template="{{pageTitle || 'Welcome'}} - Ace Admin">Welcome
-	- Ace Admin</title>
+	- Ace Admin </title>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
