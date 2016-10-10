@@ -7,11 +7,11 @@ angular.module('AceApp')
 	$scope.ace.path = {
 		'assets': 'plug-in/ace-insiap/assets' //used in page templates when linking to images, etc
 	};
-
+	
 	$scope.ace.site = {
-		brand_text : 'Ace Admin',
+		brand_text : 'InsiAP',
 		brand_icon : 'fa fa-leaf',
-		version : '1.4'
+		version : '0.1'
 	};
 
 	//sidebar variables
@@ -86,6 +86,15 @@ angular.module('AceApp')
 		return $rootScope.getData(dataName, 'common');
 	};
 	
+	//获取ebtuser信息
+	$http
+	.get('http://localhost:8080/insiap/rest/ebtuser/agent',{ cache: true })
+	.success(function(data) {
+		$scope.ebtuserinfo=data;
+	})
+	.error(function(data) {
+		
+	});
 
 });
 
