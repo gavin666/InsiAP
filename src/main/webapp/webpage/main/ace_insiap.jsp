@@ -367,11 +367,11 @@
 
 					<!-- #section:basics/sidebar.layout.shortcuts -->
 					<button class="btn btn-warning">
-						埃
+						保
 					</button>
 
 					<button class="btn btn-danger">
-						普
+						险
 					</button>
 
 					<!-- /section:basics/sidebar.layout.shortcuts -->
