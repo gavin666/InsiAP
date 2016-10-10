@@ -123,7 +123,7 @@ var app = angular
 						files: [
 							'plug-in/ace-insiap/components/jquery.gritter/css/jquery.gritter.css',
 							'plug-in/ace-insiap/components/_mod/jquery-ui.custom/jquery-ui.custom.css',
-							'css/pages/elements.css'
+							'webpage/angular/css/pages/elements.css'
 							]
 					}]);
 			}]
@@ -150,7 +150,7 @@ var app = angular
 		url: '/content-slider',
 		title: 'Content Slider',
 
-		templateUrl: 'views/pages/content-slider.html',
+		templateUrl: 'webpage/angular/views/pages/content-slider.html',
 		controller: 'ContentSliderCtrl',
 		resolve: {
 			lazyLoad: ['$ocLazyLoad', function($ocLazyLoad) {
