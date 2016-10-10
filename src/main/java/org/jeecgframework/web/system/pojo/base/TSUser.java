@@ -2,6 +2,8 @@ package org.jeecgframework.web.system.pojo.base;
 
 import org.jeecgframework.poi.excel.annotation.Excel;
 
+import com.insiap.user.entity.EBTUserEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 系统用户表
@@ -38,6 +41,18 @@ public class TSUser extends TSBaseUser implements java.io.Serializable {
 	private java.lang.String updateBy;
 	/**修改人名称*/
 	private java.lang.String updateName;
+	/**EBT代理人信息*/
+	private EBTUserEntity ebtuser;
+	
+	@Transient
+	public EBTUserEntity getEbtuser() {
+		return ebtuser;
+	}
+
+	public void setEbtuser(EBTUserEntity ebtuser) {
+		this.ebtuser = ebtuser;
+	}
+
 	@Column(name = "signatureFile", length = 100)
 	public String getSignatureFile() {
 		return this.signatureFile;

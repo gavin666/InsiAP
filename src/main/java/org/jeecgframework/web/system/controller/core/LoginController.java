@@ -47,6 +47,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.insiap.core.userinfo.GetUserInfoFromWS;
+import com.insiap.user.entity.EBTUserEntity;
 
 
 /**
@@ -119,23 +120,45 @@ public class LoginController extends BaseController{
 			}else{
 				UserID = results.get("Id").toString().trim();
 				user.setId(UserID);
-				user.setEmail(results.get("Email").toString().trim());
-				user.setMobilePhone(results.get("Phone").toString().trim());
+				user.setPassword("");
+				user.setStatus((short) 1);
+				user.setDeleteFlag((short) 0);
+												
 				//获取名片AgentCard节点信息
 				Map<String,Object> AgentCard = GetUserInfoFromWS.getUserCardInfo(UserID, "AgentCard");
-				user.setStatus((short) 1);
-				user.setRealName(AgentCard.get("AgentName").toString());
-				user.setDepartid(AgentCard.get("CompanyId").toString());
-				user.setSignatureFile(AgentCard.get("PortraitAddress").toString());
 				
 				TSDepart currentDepart = new TSDepart();
 				currentDepart.setDepartname(AgentCard.get("CompanyName").toString());
-				currentDepart.setAddress(AgentCard.get("CompanyLink").toString());
-				currentDepart.setDescription(AgentCard.get("CompanyLogo").toString());
-				currentDepart.setId(AgentCard.get("CompanyId").toString());
-				currentDepart.setOrgCode(AgentCard.get("WikiBrandID").toString());
 				currentDepart.setOrgType("1");
 				user.setCurrentDepart(currentDepart);
+				
+				EBTUserEntity ebtuser = new EBTUserEntity();
+				ebtuser.setAgentID(UserID);
+				ebtuser.setPhone(results.get("Phone").toString().trim());
+				ebtuser.setEmail(results.get("Email").toString().trim());
+				ebtuser.setEBaoAccount(results.get("EBaoAccount").toString().trim());
+				ebtuser.setBindName(results.get("BindName").toString().trim());
+				ebtuser.setBindType(results.get("BindType").toString().trim());
+				
+				ebtuser.setQQ(AgentCard.get("QQ").toString());
+				ebtuser.setWeChat(AgentCard.get("WeChat").toString());
+				ebtuser.setCompanyId(AgentCard.get("CompanyId").toString());
+				ebtuser.setPost(AgentCard.get("Post").toString());
+				ebtuser.setCreateTime(AgentCard.get("CreateTime").toString());
+				ebtuser.setNickName(AgentCard.get("NickName").toString());
+				ebtuser.setWikiBrandID(AgentCard.get("WikiBrandID").toString());
+				ebtuser.setCompanyLink(AgentCard.get("CompanyLink").toString());
+				ebtuser.setCompanyLogo(AgentCard.get("CompanyLogo").toString());
+				ebtuser.setPortraitAddress(AgentCard.get("PortraitAddress").toString());
+				ebtuser.setCompanyName(AgentCard.get("CompanyName").toString());
+				ebtuser.setMail(AgentCard.get("Mail").toString());
+				ebtuser.setVersion(AgentCard.get("Version").toString());
+				ebtuser.setCardPhone(AgentCard.get("Phone").toString());
+				ebtuser.setUpdateTime(AgentCard.get("UpdateTime").toString());
+				ebtuser.setSign(AgentCard.get("Sign").toString());
+				ebtuser.setAgentName(AgentCard.get("AgentName").toString());
+				
+				user.setEbtuser(ebtuser);
 				
 				saveLoginSuccessInfo(req, user);
 				return j;
@@ -219,10 +242,10 @@ public class LoginController extends BaseController{
 
 		if (user != null) {
 			
-            modelMap.put("userPortrait", user.getSignatureFile());
-            modelMap.put("userName", user.getUserName());
-
-            modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
+			// modelMap.put("userPortrait", user.getSignatureFile());
+			// modelMap.put("userName", user.getUserName());
+			//
+			// modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
 
             request.getSession().setAttribute("CKFinder_UserRole", "admin");
 			
