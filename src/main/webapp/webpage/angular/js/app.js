@@ -62,7 +62,7 @@ var app = angular
 	  .state('ui', {
 		'abstract': true,
 		//url: '/ui',
-		title: 'UI & Elements',
+		title: '客户关系',
 		template: '<ui-view/>',
 		
 		icon: 'fa fa-desktop'
@@ -213,7 +213,7 @@ var app = angular
 	  
 	  .state('table', {
 		url: '/table',
-		title: 'Tables',
+		title: '险种百科',
 		icon: 'fa fa-list',
 
 		templateUrl: 'webpage/angular/views/pages/table.html',
@@ -238,7 +238,7 @@ var app = angular
 	  .state('form', {
 		'abstract': true,
 		//url: '/form',
-		title: 'Forms',
+		title: '建议书',
 		template: '<ui-view/>',
 		icon: 'fa fa-pencil-square-o'
       })
@@ -458,7 +458,7 @@ var app = angular
 	  
 	  .state('widgets', {
 		url: '/widgets',
-		title: 'Widgets',
+		title: '公司前台',
 		icon: 'fa fa-list-alt',
 
 		templateUrl: 'webpage/angular/views/pages/widgets.html',
@@ -484,7 +484,7 @@ var app = angular
 	  
 	  .state('calendar', {
 		url: '/calendar',
-		title: 'Calendar',
+		title: '日程安排',
 
 		templateUrl: 'webpage/angular/views/pages/calendar.html',
 		controller: 'CalendarCtrl',
@@ -532,7 +532,7 @@ var app = angular
 	  
 	  .state('gallery', {
 		url: '/gallery',
-		title: 'Gallery',
+		title: '销售工具',
 		
 		icon: 'fa fa-picture-o',
 
@@ -566,13 +566,13 @@ var app = angular
 	  .state('more', {
 		'abstract': true,
 		//url: '/more',
-		title: 'More Pages',
+		title: '更多功能',
 		template: '<ui-view/>',
 		icon: 'fa fa-tag'
       })
 	  .state('more.profile', {
 		url: '/profile',
-		title: 'User Profile',
+		title: '个人中心',
 
 		templateUrl: 'webpage/angular/views/pages/profile.html',
 		controller: 'ProfileCtrl',
