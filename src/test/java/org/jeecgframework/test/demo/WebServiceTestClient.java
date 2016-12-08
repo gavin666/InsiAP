@@ -7,7 +7,9 @@ import org.jeecgframework.core.util.JSONHelper;
 
 import com.insiap.core.util.WebServiceConstants;
 import com.insiap.core.util.WebServiceUtil;
-
+/*
+ * 调用webservice Demo
+ */
 public class WebServiceTestClient {
 	public static void main11(String[] args) {
 		String url = WebServiceConstants.WS_URL_UAC;
