@@ -10,7 +10,8 @@ import com.insiap.core.util.RequestHeaderUtil;
   
 public class SpringRestClient {
   
-    public static final String REST_SERVICE_URI = "http://api.test.e-baotong.cn";
+//    public static final String REST_SERVICE_URI = "http://api.test.e-baotong.cn";
+    public static final String REST_SERVICE_URI = "https://api.e-bao.cn";
     public static final String User_Agent="postman ryan.liu";
     public static final String Token = "fefaewfaef";   
                
