@@ -1,7 +1,5 @@
 package org.jeecgframework.test.demo;
 
-import java.net.URI;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +43,7 @@ public class SpringRestClient {
     }
 
     public static void main(String args[]){     
-    	getUserByAuth();
+    	//getUserByAuth();
     	getUserByPost();
     }
 }
