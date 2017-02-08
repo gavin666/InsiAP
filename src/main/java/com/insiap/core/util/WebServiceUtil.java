@@ -14,10 +14,10 @@ public class WebServiceUtil {
 	/**
 	 * 调用WebService
 	 * 
-	 * @param url服务地址
-	 * @param xmlns命名空间
-	 * @param method方法名
-	 * @param pams参数集合
+	 * @param url 服务地址
+	 * @param xmlns 命名空间
+	 * @param method 方法名
+	 * @param pams 参数集合
 	 * @param SoapHeaderUser
 	 * @param SoapHeaderSign
 	 */
@@ -64,11 +64,9 @@ public class WebServiceUtil {
 	/***
 	 * 获取EBT公钥。
 	 * 
-	 * @param time
+	 * @param user
+	 * @param password
 	 * @return
-	 * @throws EBTSoapHeaderException
-	 * @throws UnknownHostException
-	 * @throws ConnectTimeoutException
 	 */
 	public static String downloadSoapHeaderKey(String user, String password) {
 
